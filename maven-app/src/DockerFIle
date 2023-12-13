@@ -1,0 +1,8 @@
+FROM openjdk:11
+WORKDIR /app
+COPY pom.xml .
+RUN mvn dependency:resolve 
+COPY src/ ./src
+RUN mvn package
+EXPOSE 8080
+CMD ["java", "-jar", "target/my-app.jar"]
