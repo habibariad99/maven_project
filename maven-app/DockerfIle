@@ -1,0 +1,24 @@
+# Use a base image with Java and Maven pre-installed
+FROM maven:3.8.4-openjdk-11-slim AS build
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the project files to the container
+COPY pom.xml .
+COPY src ./src
+
+# Build the project
+RUN mvn clean package
+
+# Use a lightweight base image for the final image
+FROM openjdk:11-jre-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the built artifact from the build image
+COPY --from=build /app/target/app.jar ./app.jar
+
+# Specify the command to run when the container starts
+CMD ["java", "-jar", "./<your-project-name>.jar"]
