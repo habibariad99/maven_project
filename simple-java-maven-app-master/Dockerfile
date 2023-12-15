@@ -29,3 +29,4 @@ CMD  ["java", "-jar", "target/my-app-1.0-SNAPSHOT.jar" , ";" , "sleep" , "1000"]
 # Specify the command to run when the container starts
 #CMD ["/usr/bin/supervisord"]
 
+
